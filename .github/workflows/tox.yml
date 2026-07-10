@@ -1,0 +1,29 @@
+name: Testing Python Code with Tox
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'development'
+      - 'stable'
+      - 'release/v*'
+      - 'feature/**'
+      - 'issue/**'
+    paths-ignore:
+      - '.github/workflows/*'
+      - '**/*.md'
+      - '**/*.txt'
+  pull_request:
+    branches:
+      - 'main'
+      - 'stable'
+      - 'release/v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tox:
+    name: Run Tox Tests
+    uses: dafneb/.github/.github/workflows/tox.yml@83e11252df7b95fc21cb491cdfbed086ac597041 # v1.8.0

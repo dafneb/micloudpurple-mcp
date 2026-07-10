@@ -1,0 +1,22 @@
+# This file is used to define development dependencies for the project.
+
+# Pre-commit hooks and development tools
+pre-commit~=4.5.1
+
+# Linters and formatters
+tox~=4.34.1
+tox-gh-actions~=3.5.0
+ruff~=0.14.13
+
+# Building and packaging tools
+build~=1.4.0
+setuptools~=83.0.0
+wheel~=0.46.2
+twine~=6.2.0
+
+# Cyclomatic complexity and code quality tools
+radon~=6.0.1
+xenon~=0.9.3
+
+# pip dependencies management
+pipdeptree~=2.30.0

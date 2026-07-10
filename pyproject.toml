@@ -1,0 +1,206 @@
+# See PEP 518 for the spec of this file
+# https://www.python.org/dev/peps/pep-0518/
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name =  "MyPythonTemplate"
+authors = [
+    {name = "David Burel", email = "david.burel@burelovi.eu"},
+]
+maintainers = [
+    {name = "David Burel", email = "david.burel@burelovi.eu"}
+]
+description = "MyPythonTemplate."
+readme = "README.md"
+keywords = [
+    "key",
+    "words",
+]
+
+dependencies = [
+]
+
+classifiers=[
+    "Development Status :: 2 - Pre-Alpha",
+    'Intended Audience :: Developers',
+    'Natural Language :: English',
+    "Programming Language :: Python :: 3 :: Only",
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+requires-python = ">=3.10"
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit~=4.5.0",
+    "tox~=4.34.1",
+    "tox-gh-actions~=3.5.0",
+    "ruff~=0.14.2",
+    "build~=1.3.0",
+    "setuptools~=83.0.0",
+    "wheel~=0.46.2",
+    "twine~=6.2.0",
+    "radon~=6.0.1",
+    "xenon~=0.9.3",
+    "pipdeptree~=2.30.0"
+]
+
+[project.urls]
+Documentation = "https://some-url"
+
+[project.scripts]
+mypythontemplate = "mypythontemplate.scripts.mypythontemplate:main"
+
+[tool.setuptools]
+package-dir = {"" = "mypythontemplate"}
+
+[tool.setuptools.dynamic]
+version = { file = "version.txt" }
+
+[tool.setuptools.packages.find]
+where = ["mypythontemplate"]
+
+[tool.setuptools.package-data]
+"mypythontemplate" = ["*.yml", "*.json", "*.txt"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+indent-width = 4
+extend-exclude = ["docs", "test", "tests", ".github"]
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+]
+extend-select = [
+    "C90",
+    "I",
+    "N",
+    "UP",
+    "YTT",
+    "ANN",
+    "ASYNC",
+    "TRIO",
+    "S",
+    "BLE",
+    "B",
+    "A",
+    "COM",
+    "C4",
+    "DTZ",
+    "T10",
+    "DJ",
+    "EM",
+    "EXE",
+    "FA",
+    "ISC",
+    "ICN",
+    "G",
+    "INP",
+    "PIE",
+    "PYI",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLOT",
+    "SIM",
+    "TID",
+    "TCH",
+    "INT",
+    "ARG",
+    "PTH",
+    "PD",
+    "PL",
+    "TRY",
+    "FLY",
+    "NPY",
+    "AIR",
+    "PERF",
+    "FURB",
+    "LOG",
+    "RUF",
+]
+ignore = [
+    "I001",
+    "NPY002",
+    "INP001",
+    "TRY003",
+    "ISC001",
+    "COM812",
+    "EM101",
+    "ANN401",
+    "S311",
+    "PLW1641",
+    "N999",
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "D206",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "COM812",
+    "COM819",
+]
+fixable = ["ALL"]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = false
+known-first-party = []
+known-local-folder = []
+known-third-party = []
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = false
+ignore-fully-untyped = false
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+docstring-quotes = "double"
+multiline-quotes = "double"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+preview = false
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 120
+
+[tool.tox]
+requires = ["tox>=4.27", "setuptools", "wheel"]
+env_list = ["3.10", "3.11", "3.12", "3.13"]
+
+[tool.tox.env_run_base]
+deps = [
+    "-r requirements.txt"
+]
+description = "Run test under {base_python}"
+commands = [["python", "run_tests.py"]]

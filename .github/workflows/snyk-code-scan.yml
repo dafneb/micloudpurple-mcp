@@ -1,0 +1,48 @@
+name: Snyk Code Scan
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'development'
+      - 'stable'
+      - 'release/v*'
+      - 'feature/**'
+      - 'issue/**'
+    paths-ignore:
+      - '.github/workflows/*'
+      - '**/*.md'
+      - '**/*.txt'
+  pull_request:
+    branches:
+      - 'main'
+      - 'stable'
+      - 'release/v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bwsecrets:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.secrets.outputs.SNYK_TOKEN }}
+    steps:
+      - name: Read secrets from Scret manager
+        id: secrets
+        uses: bitwarden/sm-action@v3.0.1
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: |
+            0adef710-59ef-49e0-a57d-b48200c0aefa > SNYK_TOKEN
+  security:
+    name: Snyk Code Scan
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    needs: bwsecrets
+    uses: dafneb/.github/.github/workflows/snyk-code-scan-python.yml@83e11252df7b95fc21cb491cdfbed086ac597041 # v1.8.0
+    secrets:
+      SNYK_TOKEN: ${{ needs.bwsecrets.outputs.output1 }}

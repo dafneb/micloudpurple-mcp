@@ -1,0 +1,77 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Python: Current File",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} ${file}",
+            "args": [],
+            "group": "build",
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "Python: Main CLI script",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} ${workspaceFolder}/mypythontemplate/scripts/mypythontemplate.py",
+            "args": [],
+            "group": "build",
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "Python: Install Dependencies",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m pip install -r ${workspaceFolder}/requirements.txt",
+            "args": [],
+            "group": "build",
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "Python: Run Tests",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} run_tests.py",
+            "args": [],
+            "group": "test",
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "Python: Run Tox Tests",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m tox run --skip-missing-interpreters",
+            "args": [],
+            "group": "test",
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "Pre-commit: Run for all files",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m pre_commit run --all-files",
+            "args": [],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "Pre-commit: Autoupdate",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m pre_commit autoupdate",
+            "args": [],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "Radon: Current File",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m radon cc ${file} -a",
+            "args": [],
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "pipdeptree: Check dependencies",
+            "type": "shell",
+            "command": "${command:python.interpreterPath} -m pipdeptree --exclude pip,pipdeptree,build,setuptools,wheel,twine,pre-commit,tox,tox-gh-actions,ruff,radon,xenon",
+            "args": [],
+            "group": "test",
+            "problemMatcher": []
+        }
+    ]
+}

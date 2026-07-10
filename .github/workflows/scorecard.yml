@@ -1,0 +1,39 @@
+name: Scorecard supply-chain security
+
+on:
+  branch_protection_rule:
+  schedule:
+    - cron: '35 23 * * 5'
+  push:
+    branches:
+      - 'main'
+      - 'stable'
+    paths-ignore:
+      - '.github/workflows/*'
+
+permissions:
+  contents: read
+
+jobs:
+  bwsecrets:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.secrets.outputs.SCORECARD_TOKEN }}
+    steps:
+      - name: Read secrets from Scret manager
+        id: secrets
+        uses: bitwarden/sm-action@v3.0.1
+        with:
+          access_token: ${{ secrets.BW_ACCESS_TOKEN }}
+          secrets: |
+            c6c73c45-fe25-4b61-9672-b48200c0e8fe > SCORECARD_TOKEN
+  scorecard:
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      id-token: write
+    needs: bwsecrets
+    uses: dafneb/.github/.github/workflows/scorecard.yml@83e11252df7b95fc21cb491cdfbed086ac597041 # v1.8.0
+    secrets:
+      SCORECARD_TOKEN: ${{ needs.bwsecrets.outputs.output1 }}
