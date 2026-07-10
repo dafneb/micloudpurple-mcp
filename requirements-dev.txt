@@ -1,7 +1,7 @@
 # This file is used to define development dependencies for the project.
 
 # Pre-commit hooks and development tools
-pre-commit~=4.5.1
+pre-commit>=4.5.1,<4.7.0
 
 # Linters and formatters
 tox~=4.34.1
