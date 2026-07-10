@@ -6,7 +6,7 @@ pre-commit~=4.5.1
 # Linters and formatters
 tox~=4.34.1
 tox-gh-actions~=3.5.0
-ruff~=0.14.13
+ruff>=0.14.13,<0.16.0
 
 # Building and packaging tools
 build~=1.4.0
