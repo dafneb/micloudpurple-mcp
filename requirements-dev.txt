@@ -4,14 +4,14 @@
 pre-commit>=4.5.1,<4.7.0
 
 # Linters and formatters
-tox~=4.34.1
+tox>=4.34.1,<4.57.0
 tox-gh-actions~=3.5.0
-ruff~=0.14.13
+ruff>=0.14.13,<0.16.0
 
 # Building and packaging tools
-build~=1.4.0
+build>=1.4,<1.6
 setuptools~=83.0.0
-wheel~=0.46.2
+wheel>=0.46.2,<0.48.0
 twine~=6.2.0
 
 # Cyclomatic complexity and code quality tools
